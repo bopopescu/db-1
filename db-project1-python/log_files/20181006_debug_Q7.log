@@ -1,0 +1,3 @@
+INFO     - 2018-10-06 10:22:53,107 [Q7.py][q7_1]  INSERT INTO `EMPLOYEE` (SSN, Fname, Minit, Lname, Address, Sex, Birth_date, Salary, Supervisor, Department) VALUES (%s, %s, %s, %s, %s, %s, STR_TO_DATE(%s, '%d-%b-%Y'), %s, %s, %s) ('1234567890', 'Dhruvi', 'R', 'Rajput', '4 ABC Street, XYZ Town 12345', 'F', '11-AUG-2012', 55000, '333445555', 5)
+INFO     - 2018-10-06 10:24:12,947 [Q7.py][q7_2]  INSERT INTO `WORKS_ON` (Essn, Pno, Hours) VALUES (%s, %s, %s) ('1234567890', 4, 10.0)
+INFO     - 2018-10-06 10:24:38,327 [Q7.py][q7_3]  INSERT INTO `PROJECT` (Pname, Pnumber, Plocation, Controlling_department) VALUES (%s, %s, %s, %s) ('TEST', 15, 'Dallas', 5)

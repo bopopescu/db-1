@@ -1,0 +1,9 @@
+mysql> INSERT INTO `EMPLOYEE` (SSN, Fname, Minit, Lname, Address, Sex, Birth_date, Salary, Supervisor, Department) VALUES ('1234567890', 'Dhruvi', 'R', 'Rajput', '4 ABC Street, XYZ Town 12345', 'F', STR_TO_DATE('11-AUG-2012', '%d-%b-%Y'), 55000, '123456789', 15);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`db-project-1`.`EMPLOYEE`, CONSTRAINT `EMPLOYEE_ibfk_2` FOREIGN KEY (`Department`) REFERENCES `DEPARTMENT` (`Dnumber`))
+
+mysql> INSERT INTO `WORKS_ON` (Essn, Pno, Hours) VALUES ('111111103', 25, 10.0);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`db-project-1`.`WORKS_ON`, CONSTRAINT `WORKS_ON_ibfk_2` FOREIGN KEY (`Pno`) REFERENCES `PROJECT` (`Pnumber`))
+
+mysql> INSERT INTO `PROJECT` (Pname, Pnumber, Plocation, Controlling_department) VALUES ('TEST', 15, 'Dallas', 22);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`db-project-1`.`PROJECT`, CONSTRAINT `PROJECT_ibfk_1` FOREIGN KEY (`Controlling_department`) REFERENCES `DEPARTMENT` (`Dnumber`))
+

@@ -1,0 +1,260 @@
+mysql> use db-project-1;
+Database changed
+
+/* 1. Select all the attributes for all employees whose last name is 'Jones' or ‘James’.*/
+mysql> SELECT * FROM EMPLOYEE WHERE Lname='Jones' OR Lname='James';
++-----------+-------+-------+-------+-------------------------------+------+------------+----------+------------+------------+---------------+
+| SSN       | Fname | Minit | Lname | Address                       | Sex  | Birth_date | Salary   | Supervisor | Department | Name          |
++-----------+-------+-------+-------+-------------------------------+------+------------+----------+------------+------------+---------------+
+| 111111100 | Jared | D     | James | 123 Peachtr,Atlanta,GA        | M    | 1966-10-10 | 85000.00 | NULL       |          6 | Jared D James |
+| 111111101 | Jon   | C     | Jones | 111 Allgood,Atlanta,GA        | M    | 1967-11-14 | 45000.00 | 111111100  |          6 | Jon C Jones   |
+| 254937381 | Megan | G     | Jones | 528 Stone CT,Chicago,IL       | F    | 1961-03-02 | 62000.00 | 666666600  |          8 | Megan G Jones |
+| 555555500 | John  | C     | James | 766 Bloomington,Sacramento,CA | M    | 1975-06-30 | 81000.00 | NULL       |          8 | John C James  |
++-----------+-------+-------+-------+-------------------------------+------+------------+----------+------------+------------+---------------+
+4 rows in set (0.00 sec)
+
+/* 2. Select all the attributes for all employees whose first name is 'Kim' or ‘Wilson’. */
+mysql> SELECT * FROM EMPLOYEE WHERE Fname='Kim' OR Fname='Wilson';
++-----------+--------+-------+--------+-----------------------------+------+------------+----------+------------+------------+-----------------+
+| SSN       | Fname  | Minit | Lname  | Address                     | Sex  | Birth_date | Salary   | Supervisor | Department | Name            |
++-----------+--------+-------+--------+-----------------------------+------+------------+----------+------------+------------+-----------------+
+| 242916639 | Wilson | A     | Holmes | 21 South Co,Arlington,TX    | M    | 1971-06-02 | 72500.00 | 555555500  |          4 | Wilson A Holmes |
+| 333333300 | Kim    | C     | Grace  | 667 Mills Ave,Sacramento,CA | F    | 1970-10-23 | 79000.00 | NULL       |          6 | Kim C Grace     |
+| 444222666 | Kim    | G     | Ted    | 3648 Tree Cir,Austin,TX     | M    | 1968-04-15 | 50000.00 | 999999999  |          8 | Kim G Ted       |
++-----------+--------+-------+--------+-----------------------------+------+------------+----------+------------+------------+-----------------+
+3 rows in set (0.00 sec)
+
+/* 3. Select the names and Ssn of employees who work on more than one project and count the total hours that the employees work on. */
+mysql> SELECT e.Name, e.SSN, SUM(w.Hours) FROM EMPLOYEE e, WORKS_ON w WHERE e.SSN = w.Essn GROUP BY w.Essn HAVING COUNT(*) > 1;
++--------------------+-----------+--------------+
+| Name               | SSN       | SUM(w.Hours) |
++--------------------+-----------+--------------+
+| Cameron D Thirteen | 111422203 |         50.0 |
+| John B Smith       | 123456789 |         40.0 |
+| Richard T Koelbel  | 214370999 |         39.0 |
+| Erin A Maxfield    | 242535609 |         40.0 |
+| Wilson A Holmes    | 242916639 |         35.0 |
+| Jake D Sheen       | 245239264 |         55.0 |
+| Frank T Wong       | 333445555 |         30.0 |
+| Leonard H Moody    | 349273344 |         25.0 |
+| Percy M Liang      | 398172999 |         20.0 |
+| Joyce A English    | 453453453 |         40.0 |
+| Red A Bacher       | 666666613 |         50.0 |
+| Jennifer S Wallace | 987654321 |         35.0 |
+| Ahmad V Jabbar     | 987987987 |         40.0 |
+| Alicia J Zelaya    | 999887777 |         40.0 |
+| Roy C Lewallen     | 999999999 |         40.0 |
++--------------------+-----------+--------------+
+15 rows in set (0.00 sec)
+
+/* 4. For each PROJECT, retrieve the project name, number, and location plus the number of employees who works on the project. */
+mysql> SELECT p.Pname, p.Pnumber, p.Plocation, COUNT(w.Essn) as `Number of Employee` FROM PROJECT p, WORKS_ON w WHERE p.Pnumber = w.Pno GROUP BY w.Pno;
++------------------+---------+------------+--------------------+
+| Pname            | Pnumber | Plocation  | Number of Employee |
++------------------+---------+------------+--------------------+
+| EntityAnnot      |       4 | Houston    |                  3 |
+| Analysis         |       5 | Sacramento |                  6 |
+| EventManagement  |       6 | Sacramento |                  5 |
+| FoodDistribution |       7 | Sacramento |                  5 |
+| Computerization  |      10 | Stafford   |                  6 |
+| ConfigMgmt       |      11 | Atlanta    |                  3 |
+| DataMining       |      13 | Sacramento |                  1 |
+| Reorganization   |      20 | Houston    |                  3 |
+| SearchEngine     |      22 | Arlington  |                  2 |
+| MotherBoard      |      29 | Milwaukee  |                  3 |
+| Benefits         |      30 | Stafford   |                  4 |
+| OperatingSystem  |      61 | Sacramento |                 11 |
+| DatabaseSystems  |      62 | Atlanta    |                 11 |
+| Middleware       |      63 | Atlanta    |                  9 |
+| Advertizing      |      70 | Arlington  |                  4 |
+| InkjetPrinters   |      91 | Milwaukee  |                 10 |
+| LaserPrinters    |      92 | Milwaukee  |                  5 |
+| HumanResource    |      95 | Arlington  |                  4 |
++------------------+---------+------------+--------------------+
+18 rows in set (0.00 sec)
+
+/* 5. For each employee who works in department 5 on a project in Houston, retrieve the employee’s Ssn, first and last names, and the project number, name, and hours for each project that the employee works on. */
+mysql> SELECT e.SSN, e.Fname, e.Lname, p.Pname, p.Pnumber, w.Hours FROM EMPLOYEE e, PROJECT p, WORKS_ON w WHERE e.DEPARTMENT = 5 AND SSN IN (SELECT w.Essn FROM WORKS_ON w WHERE w.Pno IN (SELECT p.Pnumber FROM PROJECT p WHERE p.Controlling_department = 5 AND p.Plocation = 'Houston')) AND e.SSN = w.Essn AND p.Pnumber = w.Pno;
++-----------+---------+--------+-------------+---------+-------+
+| SSN       | Fname   | Lname  | Pname       | Pnumber | Hours |
++-----------+---------+--------+-------------+---------+-------+
+| 636669233 | Michael | Morgan | EntityAnnot |       4 |  11.0 |
++-----------+---------+--------+-------------+---------+-------+
+1 row in set (0.00 sec)
+
+/* 6. Retrieve the last name and first name of all employees who work more than 40 hours per week total (on all their projects). */
+mysql> SELECT Fname, Lname FROM EMPLOYEE WHERE SSN IN (SELECT Essn FROM WORKS_ON GROUP BY Essn HAVING SUM(Hours) > 40);
++---------+----------+
+| Fname   | Lname    |
++---------+----------+
+| Cameron | Thirteen |
+| Josh    | Zell     |
+| Jake    | Sheen    |
+| Jeff    | Chase    |
+| Nandita | Ball     |
+| Red     | Bacher   |
++---------+----------+
+6 rows in set (0.01 sec)
+
+/* 7. Select the first and last name of each employee who is a supervisor, plus count the total number of employees supervised by each supervisor. */
+mysql> SELECT e1.Fname, e1.Lname, (SELECT COUNT(SSN) FROM EMPLOYEE e WHERE e.Supervisor=e1.SSN) as `Number of employees supervised` FROM EMPLOYEE e1 where e1.SSN IN (SELECT Supervisor FROM EMPLOYEE WHERE Supervisor IS NOT NULL);
++----------+----------+--------------------------------+
+| Fname    | Lname    | Number of employees supervised |
++----------+----------+--------------------------------+
+| Jared    | James    |                              4 |
+| Juan     | Linda    |                              2 |
+| John     | Smith    |                              1 |
+| Evan     | Wallis   |                              3 |
+| Josh     | Zell     |                              2 |
+| John     | Ed       |                              1 |
+| Kim      | Grace    |                              1 |
+| Frank    | Wong     |                              3 |
+| Alex     | Freed    |                              7 |
+| Bonnie   | Bays     |                              1 |
+| Alec     | Best     |                              1 |
+| Sam      | Snedden  |                              1 |
+| John     | James    |                              3 |
+| Nandita  | Ball     |                              2 |
+| Bob      | Bender   |                              4 |
+| Jill     | Jarvis   |                              1 |
+| Kate     | King     |                              3 |
+| Lyle     | Leslie   |                              2 |
+| Billie   | King     |                              1 |
+| Gerald   | Small    |                              1 |
+| Naveen   | Drew     |                              1 |
+| Carl     | Reedy    |                              1 |
+| Sammy    | Hall     |                              2 |
+| Red      | Bacher   |                              2 |
+| Jennifer | Wallace  |                              2 |
+| Ahmad    | Jabbar   |                              1 |
+| Roy      | Lewallen |                              3 |
++----------+----------+--------------------------------+
+27 rows in set (0.00 sec)
+
+/* 8. For each project determine the total hours that employees work on that project per week. */
+mysql> SELECT e.Name, SUM(Hours) AS `Total Hours` FROM EMPLOYEE e, WORKS_ON w WHERE e.SSN = w.Essn GROUP BY w.Essn;
++--------------------+-------------+
+| Name               | Total Hours |
++--------------------+-------------+
+| Alex C Yu          |        18.0 |
+| Lisa G House       |        10.0 |
+| Jared D James      |        40.0 |
+| Jon C Jones        |        40.0 |
+| Justin Mark        |        40.0 |
+| Brad C Knight      |        40.0 |
+| Cameron D Thirteen |        50.0 |
+| Juan G Linda       |        40.0 |
+| John B Smith       |        40.0 |
+| Debra T Hall       |        20.0 |
+| Richard T Koelbel  |        39.0 |
+| Evan E Wallis      |        40.0 |
+| Josh U Zell        |        48.0 |
+| Andy C Vile        |        40.0 |
+| Tom G Brand        |        40.0 |
+| Jenny F Vos        |        40.0 |
+| Chris A Carter     |        40.0 |
+| John T Ed          |        10.0 |
+| Jennifer A Joy     |        20.0 |
+| willie D Mary      |        35.0 |
+| Christina S Hisel  |         4.0 |
+| Erin A Maxfield    |        40.0 |
+| Wilson A Holmes    |        35.0 |
+| Jake D Sheen       |        55.0 |
+| Megan G Jones      |        40.0 |
+| Jisha A Carpenter  |        25.0 |
+| Kim C Grace        |        40.0 |
+| Jeff H Chase       |        46.0 |
+| Frank T Wong       |        30.0 |
+| Jose H Barbara     |        40.0 |
+| Leonard H Moody    |        25.0 |
+| Percy M Liang      |        20.0 |
+| Cindy K Burklow    |        25.0 |
+| Gregory G Laurie   |        25.0 |
+| Kim G Ted          |        25.0 |
+| Alex D Freed       |        40.0 |
+| Bonnie S Bays      |        40.0 |
+| Alec C Best        |        40.0 |
+| Sam S Snedden      |        40.0 |
+| Joyce A English    |        40.0 |
+| John C James       |        40.0 |
+| Nandita K Ball     |        44.0 |
+| Michael A Morgan   |        11.0 |
+| Jill J Jarvis      |        40.0 |
+| Lyle G Leslie      |        40.0 |
+| Billie J King      |        40.0 |
+| Jon A Kramer       |        40.0 |
+| Ray H King         |        40.0 |
+| Gerald D Small     |        40.0 |
+| Arnold A Head      |        40.0 |
+| Helga C Pataki     |        40.0 |
+| Naveen B Drew      |        40.0 |
+| Carl E Reedy       |        40.0 |
+| Sammy G Hall       |        40.0 |
+| Red A Bacher       |        50.0 |
+| Ramesh K Narayan   |        40.0 |
+| Penny G Wolowitz   |         4.0 |
+| Sheldon C Cucuou   |        23.0 |
+| James U Miller     |        15.0 |
+| Joseph K Kirkish   |        33.0 |
+| Zach A Geller      |        30.0 |
+| Jennifer S Wallace |        35.0 |
+| Ahmad V Jabbar     |        40.0 |
+| Alicia J Zelaya    |        40.0 |
+| Roy C Lewallen     |        40.0 |
++--------------------+-------------+
+65 rows in set (0.00 sec)
+
+/* 9. Find which employee has more than 2 dependents. */
+mysql> SELECT e.Name, COUNT(d.Essn) AS `Total dependents` FROM EMPLOYEE e, DEPENDENT d WHERE e.SSN = d.Essn GROUP BY d.Essn HAVING COUNT(d.Essn) > 2;
++---------------+------------------+
+| Name          | Total dependents |
++---------------+------------------+
+| Bonnie S Bays |                3 |
+| Arnold A Head |                3 |
++---------------+------------------+
+2 rows in set (0.01 sec)
+
+/* 10. Find which employee has more than 1 children. */
+mysql> SELECT e.Name, COUNT(d.Essn) AS `Total dependents` FROM EMPLOYEE e, DEPENDENT d WHERE e.SSN = d.Essn AND d.Relationship = 'Children' GROUP BY d.Essn HAVING COUNT(d.Essn) > 1;
++---------------+------------------+
+| Name          | Total dependents |
++---------------+------------------+
+| Bonnie S Bays |                2 |
+| Arnold A Head |                2 |
++---------------+------------------+
+2 rows in set (0.00 sec)
+
+/* 12. Find all the departments located in Houston and list how many projects are their under those departments. */
+mysql> SELECT d.Dnumber, p.Pnumber, p.Pname FROM DEPT_LOCATIONS d, PROJECT p WHERE d.Dlocation = 'Houston' AND p.Controlling_department = d.Dnumber;
++---------+---------+----------------+
+| Dnumber | Pnumber | Pname          |
++---------+---------+----------------+
+|       1 |      20 | Reorganization |
+|       5 |       4 | EntityAnnot    |
++---------+---------+----------------+
+2 rows in set (0.00 sec)
+
+/* 11. Find all the employee who works in the department that is located in Atlanta. Select their first name and last name. */
+mysql> SELECT Fname, Lname FROM EMPLOYEE WHERE Department IN (SELECT Dnumber FROM DEPT_LOCATIONS WHERE Dlocation = 'Atlanta');
++-----------+----------+
+| Fname     | Lname    |
++-----------+----------+
+| Alex      | Yu       |
+| Jared     | James    |
+| Jon       | Jones    |
+| Justin    | Mark     |
+| Brad      | Knight   |
+| Debra     | Hall     |
+| John      | Ed       |
+| Christina | Hisel    |
+| Jake      | Sheen    |
+| Kim       | Grace    |
+| Jeff      | Chase    |
+| Jose      | Barbara  |
+| Cindy     | Burklow  |
+| Nandita   | Ball     |
+| Penny     | Wolowitz |
+| Zach      | Geller   |
++-----------+----------+
+16 rows in set (0.00 sec)
+

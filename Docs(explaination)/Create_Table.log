@@ -1,0 +1,152 @@
+
+/* Load Department table. */
+CREATE TABLE `DEPARTMENT` (
+  `Dname` varchar(50) NOT NULL,
+  `Dnumber` int(11) NOT NULL,
+  `Manager_ssn` varchar(100) DEFAULT NULL,
+  `Manager_start_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/* Load Dependent table. */
+CREATE TABLE `DEPENDENT` (
+  `Essn` varchar(15) NOT NULL,
+  `Dependent_name` varchar(100) NOT NULL,
+  `Sex` char(1) DEFAULT NULL,
+  `Birth_date` date DEFAULT NULL,
+  `Relationship` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/* Load Dept_Locations table. */
+CREATE TABLE `DEPT_LOCATIONS` (
+  `Dnumber` int(11) NOT NULL,
+  `Dlocation` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/* Load Employee table.
+   And here, the Name field is the composite of Fname, Minit and Lname.
+ */
+CREATE TABLE `EMPLOYEE` (
+  `SSN` varchar(15) NOT NULL,
+  `Fname` varchar(50) NOT NULL,
+  `Minit` varchar(1) DEFAULT NULL,
+  `Lname` varchar(50) NOT NULL,
+  `Address` varchar(500) DEFAULT NULL,
+  `Sex` varchar(6) DEFAULT NULL,
+  `Birth_date` date DEFAULT NULL,
+  `Salary` decimal(10,2) DEFAULT NULL,
+  `Supervisor` varchar(15) DEFAULT NULL,
+  `Department` int(11) NOT NULL,
+  `Name` varchar(200) GENERATED ALWAYS AS (concat_ws(' ',`Fname`,`Minit`,`Lname`)) VIRTUAL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/* Load Project table. */
+CREATE TABLE `PROJECT` (
+  `Pname` varchar(50) NOT NULL,
+  `Pnumber` int(11) NOT NULL,
+  `Plocation` varchar(25) DEFAULT NULL,
+  `Controlling_department` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/* Load Works_on table. */
+CREATE TABLE `WORKS_ON` (
+  `Essn` varchar(15) NOT NULL,
+  `Pno` int(11) NOT NULL,
+  `Hours` decimal(3,1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+/* Adding the Constraints (Primary and Foreign Key). */
+
+/* In Department table, 
+	add Primary key to Dnumber. 
+	add Unique Constraint to Dname And
+	add Index key to Manager_ssn.
+*/
+ALTER TABLE `DEPARTMENT`
+  ADD PRIMARY KEY (`Dnumber`),
+  ADD UNIQUE KEY `Dname` (`Dname`),
+  ADD KEY `Manager_ssn` (`Manager_ssn`);
+
+
+/* In Dependent table, 
+	add Composite Primary key to Essn and Dependent_name.
+*/
+ALTER TABLE `DEPENDENT`
+  ADD PRIMARY KEY (`Essn`,`Dependent_name`);
+
+
+/* In Dept_Loactions table, 
+	add Composite Primary key to Dnumber and Dlocation.
+*/
+ALTER TABLE `DEPT_LOCATIONS`
+  ADD PRIMARY KEY (`Dnumber`,`Dlocation`);
+
+
+/* In Employee table, 
+	add Primary key to SSN,
+	add Constraint to Supervisor and Department.
+*/
+ALTER TABLE `EMPLOYEE`
+  ADD PRIMARY KEY (`SSN`),
+  ADD KEY `Supervisor` (`Supervisor`),
+  ADD KEY `Department` (`Department`);
+
+
+/* In Project table, 
+	add Primary key to Pnumber,
+	add Unique Constraint to Pname and
+	add constraint key to Controlling_department.
+*/
+ALTER TABLE `PROJECT`
+  ADD PRIMARY KEY (`Pnumber`),
+  ADD UNIQUE KEY `Pname` (`Pname`),
+  ADD KEY `Controlling_department` (`Controlling_department`);
+
+
+/* In Works_on table, 
+	add Composite Primary key to Essn and Pno,
+	add constraint key to Pno.
+*/
+ALTER TABLE `WORKS_ON`
+  ADD PRIMARY KEY (`Essn`,`Pno`),
+  ADD KEY `Pno` (`Pno`);
+
+
+/* In Department table, 
+	add Foreign key constraint to Manager_ssn which refer to SSN in Employee table.
+*/
+ALTER TABLE `DEPARTMENT`
+  ADD CONSTRAINT `DEPARTMENT_ibfk_1` FOREIGN KEY (`Manager_ssn`) REFERENCES `EMPLOYEE` (`SSN`);
+
+
+/* In Dept_Locations table, 
+	add Foreign key constraint to Dnumber which refer to Dnumber in Department table.
+*/
+ALTER TABLE `DEPT_LOCATIONS`
+  ADD CONSTRAINT `DEPT_LOCATIONS_ibfk_1` FOREIGN KEY (`Dnumber`) REFERENCES `DEPARTMENT` (`Dnumber`);
+
+
+/* In Employee table, 
+	add Foreign key constraint to Supervisor which refer to SSN in Employee table,
+	add Foreign key constraint to Department which refer to Dnumber in Department table.
+*/
+ALTER TABLE `EMPLOYEE`
+  ADD CONSTRAINT `EMPLOYEE_ibfk_1` FOREIGN KEY (`Supervisor`) REFERENCES `EMPLOYEE` (`SSN`),
+  ADD CONSTRAINT `EMPLOYEE_ibfk_2` FOREIGN KEY (`Department`) REFERENCES `DEPARTMENT` (`Dnumber`);
+
+
+/* In Project table, 
+	add Foreign key constraint to Controlling_department which refer to Dnumber in DEPARTMENT table.
+*/
+ALTER TABLE `PROJECT`
+  ADD CONSTRAINT `PROJECT_ibfk_1` FOREIGN KEY (`Controlling_department`) REFERENCES `DEPARTMENT` (`Dnumber`);
+
+
+/* In Works_on table, 
+	add Foreign key constraint to Essn which refer to SSN in Employee table,
+	add Foreign ket constraint to Pno which refer to Pnumber in Project table.
+*/
+ALTER TABLE `WORKS_ON`
+  ADD CONSTRAINT `WORKS_ON_ibfk_1` FOREIGN KEY (`Essn`) REFERENCES `EMPLOYEE` (`SSN`),
+  ADD CONSTRAINT `WORKS_ON_ibfk_2` FOREIGN KEY (`Pno`) REFERENCES `PROJECT` (`Pnumber`);
+

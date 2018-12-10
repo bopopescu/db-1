@@ -1,0 +1,556 @@
+mysql> use db-project-1 ;
+Database changed
+mysql> INSERT INTO DEPENDENT (Essn, Dependent_name, Sex, Birth_date, Relationship) VALUES 
+    -> ('888665151', 'Mary Alice', 'F', STR_TO_DATE('10-NOV-1924','%d-%b-%Y'), 'Spouse'),
+    -> ('444444400', 'Kathy', 'F', STR_TO_DATE('09-OCT-1944','%d-%b-%Y'), 'Spouse'),
+    -> ('999887777', 'John Smith', 'M', STR_TO_DATE('19-JUL-1956','%d-%b-%Y'), 'Spouse'),
+    -> ('987987987', 'Khadeja Begum', 'F', STR_TO_DATE('29-MAR-1949','%d-%b-%Y'), 'Spouse'),
+    -> ('987987987', 'Jalil Ahmad', 'M', STR_TO_DATE('29-MAR-1929','%d-%b-%Y'), 'Children'),
+    -> ('222222200', 'Jay Wallis', 'M', STR_TO_DATE('16-JAN-1956','%d-%b-%Y'), 'Spouse'),
+    -> ('222222202', 'Mindy Vile', 'F', STR_TO_DATE('21-JUN-1942','%d-%b-%Y'), 'Spouse'),
+    -> ('222222202', 'Amenda Vile', 'F', STR_TO_DATE('21-JUN-1914','%d-%b-%Y'), 'Children'),
+    -> ('222222204', 'Amy Vos', 'F', STR_TO_DATE('11-NOV-1963','%d-%b-%Y'), 'Spouse'),
+    -> ('222222204', 'james Vos', 'M', STR_TO_DATE('11-NOV-1937','%d-%b-%Y'), 'Children'),
+    -> ('444444401', 'William Bayes', 'M', STR_TO_DATE('19-JUN-1954','%d-%b-%Y'), 'Spouse'),
+    -> ('444444401', 'Amy Bayes', 'F', STR_TO_DATE('18-JUN-1926','%d-%b-%Y'), 'Children'),
+    -> ('444444401', 'Tom Bayes', 'M', STR_TO_DATE('20-JUN-1926','%d-%b-%Y'), 'Children'),
+    -> ('666666601', 'Mary Jarvice', 'F', STR_TO_DATE('14-JAN-1964','%d-%b-%Y'), 'Spouse'),
+    -> ('666666602', 'Bond King', 'M', STR_TO_DATE('16-APR-1964','%d-%b-%Y'), 'Spouse'),
+    -> ('666666604', 'Monia King', 'F', STR_TO_DATE('01-JAN-1955','%d-%b-%Y'), 'Spouse'),
+    -> ('666666605', 'Aly Kramer', 'F',STR_TO_DATE('22-AUG-1961','%d-%b-%Y'), 'Spouse'),
+    -> ('666666606', 'Chistina King', 'F', STR_TO_DATE('16-AUG-1948','%d-%b-%Y'), 'Spouse'),
+    -> ('666666607', 'Alex Small', 'F',STR_TO_DATE('15-MAY-1960','%d-%b-%Y'), 'Spouse'),
+    -> ('666666608', 'Katherin Head', 'F', STR_TO_DATE('19-MAY-1964','%d-%b-%Y'), 'Spouse'),
+    -> ('666666608', 'Monica Head', 'F', STR_TO_DATE('19-MAY-1937','%d-%b-%Y'), 'Children'),
+    -> ('666666608', 'Rachel Head', 'M', STR_TO_DATE('18-MAY-1937','%d-%b-%Y'), 'Children');
+Query OK, 22 rows affected (0.10 sec)
+Records: 22  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO DEPARTMENT (Dname, Dnumber) VALUES
+    -> ('Research', 5),
+    -> ('Administration', 4),
+    -> ('Headquarters', 1),
+    -> ('Software', 6),
+    -> ('Hardware', 7),
+    -> ('Sales', 8),
+    -> ('HR', 9),
+    -> ('Networking', 3),
+    -> ('QA', 11);
+Query OK, 9 rows affected (0.12 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO EMPLOYEE (Fname, Minit, Lname, SSN, Birth_date, Address, Sex, Salary, Department) VALUE 
+    -> ('James', 'E', 'Jordan', '888665151', STR_TO_DATE('10-NOV-1927','%d-%b-%Y'), '450 Stone,Houston,TX', 'M', 55000, 1),
+    -> ('Frank', 'T', 'Wong', '333445555', STR_TO_DATE('08-DEC-1945','%d-%b-%Y'), '638 Voss,Houston,TX', 'M', 40000, 5),
+    -> ('Jennifer', 'S', 'Wallace', '987654321', STR_TO_DATE('20-JUN-1931','%d-%b-%Y'), '291 Berry,Bellaire,TX', 'F', 43000, 4),
+    -> ('Jared', 'D', 'James', '111111100', STR_TO_DATE('10-OCT-1966','%d-%b-%Y'), '123 Peachtr,Atlanta,GA', 'M', 85000, 6),
+    -> ('Alex', 'D', 'Freed', '444444400', STR_TO_DATE('09-OCT-1950','%d-%b-%Y'), '4333 Pillsbury,Milwaukee,WI', 'M', 89000, 7),
+    -> ('John', 'C', 'James', '555555500', STR_TO_DATE('30-JUN-1975','%d-%b-%Y'), '766 Bloomington,Sacramento,CA', 'M', 81000, 8),
+    -> ('John', 'B', 'Smith', '123456789', STR_TO_DATE('09-Jan-1955','%d-%b-%Y'), '731 Fondren,Houston,TX', 'M', 30000, 5),
+    -> ('Alicia', 'J', 'Zelaya', '999887777', STR_TO_DATE('19-JUL-1958','%d-%b-%Y'), '3321 Castle,Spring,TX', 'F', 25000, 4),
+    -> ('Ramesh', 'K', 'Narayan', '666884444', STR_TO_DATE('15-SEP-1952','%d-%b-%Y'), '971 Fire Oak,Humble,TX', 'M', 38000, 5),
+    -> ('Joyce', 'A', 'English', '453453453', STR_TO_DATE('31-JUL-1962','%d-%b-%Y'), '5631 Rice Oak,Houston,TX', 'F', 25000, 5),
+    -> ('Ahmad', 'V', 'Jabbar', '987987987', STR_TO_DATE('29-MAR-1959','%d-%b-%Y'), '980 Dallas,Houston,TX', 'M', 25000, 4),
+    -> ('Jon', 'C', 'Jones', '111111101', STR_TO_DATE('14-NOV-1967','%d-%b-%Y'), '111 Allgood,Atlanta,GA', 'M', 45000, 6),
+    -> ('Justin', NULL, 'Mark', '111111102', STR_TO_DATE('12-JAN-1966','%d-%b-%Y'), '2342 May,Atlanta,GA', 'M', 40000, 6),
+    -> ('Brad', 'C', 'Knight', '111111103', STR_TO_DATE('13-FEB-1968','%d-%b-%Y'), '176 Main St.,Atlanta,GA', 'M', 44000, 6),
+    -> ('Evan', 'E', 'Wallis', '222222200', STR_TO_DATE('16-JAN-1958','%d-%b-%Y'), '134 Pelham,Milwaukee,WI', 'M', 92000, 7),
+    -> ('Josh', 'U', 'Zell', '222222201', STR_TO_DATE('22-MAY-1954','%d-%b-%Y'), '266 McGrady,Milwaukee,WI', 'M', 56000, 7),
+    -> ('Andy', 'C', 'Vile', '222222202', STR_TO_DATE('21-JUN-1944','%d-%b-%Y'), '1967 Jordan,Milwaukee,WI', 'M', 53000, 7),
+    -> ('Tom', 'G', 'Brand', '222222203', STR_TO_DATE('16-DEC-1966','%d-%b-%Y'), '112 Third St,Milwaukee,WI', 'M', 62500, 7),
+    -> ('Jenny', 'F', 'Vos', '222222204', STR_TO_DATE('11-NOV-1967','%d-%b-%Y'), '263 Mayberry,Milwaukee,WI', 'F', 61000, 7),
+    -> ('Chris', 'A', 'Carter', '222222205', STR_TO_DATE('21-MAR-1960','%d-%b-%Y'), '565 Jordan,Milwaukee,WI', 'F', 43000, 7),
+    -> ('Kim', 'C', 'Grace', '333333300', STR_TO_DATE('23-OCT-1970','%d-%b-%Y'), '667 Mills Ave,Sacramento,CA', 'F', 79000, 6),
+    -> ('Jeff', 'H', 'Chase', '333333301', STR_TO_DATE('07-JAN-1970','%d-%b-%Y'), '15 Bradbury,Sacramento,CA', 'M', 44000, 6),
+    -> ('Bonnie', 'S', 'Bays', '444444401', STR_TO_DATE('19-JUN-1956','%d-%b-%Y'), '111 Hollow,Milwaukee,WI', 'F', 70000, 7),
+    -> ('Alec', 'C', 'Best', '444444402', STR_TO_DATE('18-JUN-1966','%d-%b-%Y'), '233 Solid,Milwaukee,WI', 'M', 60000, 7),
+    -> ('Sam', 'S', 'Snedden', '444444403', STR_TO_DATE('31-JUL-1977','%d-%b-%Y'), '97 Windy St,Milwaukee,WI', 'M', 48000, 7),
+    -> ('Nandita', 'K', 'Ball', '555555501', STR_TO_DATE('16-APR-1969','%d-%b-%Y'), '222 Howard,Sacramento,CA', 'M', 62000, 6),
+    -> ('Bob', 'B', 'Bender', '666666600', STR_TO_DATE('17-APR-1968','%d-%b-%Y'), '8794 Garfield,Chicago,IL', 'M', 96000, 8),
+    -> ('Jill', 'J', 'Jarvis', '666666601', STR_TO_DATE('14-JAN-1966','%d-%b-%Y'), '6234 Lincoln,Chicago,IL', 'F', 36000, 8),
+    -> ('Kate', 'W', 'King', '666666602', STR_TO_DATE('16-APR-1966','%d-%b-%Y'), '1976 Boone Trace,Chicago,IL', 'F', 44000, 8),
+    -> ('Lyle', 'G', 'Leslie', '666666603', STR_TO_DATE('09-JUN-1963','%d-%b-%Y'), '417 Hancock Ave,Chicago,IL', 'M', 41000, 8),
+    -> ('Billie', 'J', 'King', '666666604', STR_TO_DATE('01-JAN-1960','%d-%b-%Y'), '556 Washington,Chicago,IL', 'F', 38000, 8),
+    -> ('Megan', 'G', 'Jones', '254937381', STR_TO_DATE('02-MAR-1961','%d-%b-%Y'), '528 Stone CT,Chicago,IL', 'F', 62000, 8),
+    -> ('Jon', 'A', 'Kramer', '666666605', STR_TO_DATE('22-AUG-1964','%d-%b-%Y'), '1988 Windy Creek,Seattle,WA', 'M', 41500, 8),
+    -> ('Ray', 'H', 'King', '666666606', STR_TO_DATE('16-AUG-1949','%d-%b-%Y'), '213 Delk Road,Seattle,WA', 'M', 44500, 8),
+    -> ('Gerald', 'D', 'Small', '666666607', STR_TO_DATE('15-MAY-1962','%d-%b-%Y'), '122 Ball Street,Dallas,TX', 'M', 29000, 8),
+    -> ('Arnold', 'A', 'Head', '666666608', STR_TO_DATE('19-MAY-1967','%d-%b-%Y'), '233 Spring St,Dallas,TX', 'M', 33000, 8),
+    -> ('Helga', 'C', 'Pataki', '666666609', STR_TO_DATE('11-MAR-1969','%d-%b-%Y'), '101 Holyoke St,Dallas,TX', 'F', 32000, 8),
+    -> ('Naveen', 'B', 'Drew', '666666610', STR_TO_DATE('23-MAY-1970','%d-%b-%Y'), '198 Elm St,Philadelphia,PA', 'M', 34000, 8),
+    -> ('Carl', 'E', 'Reedy', '666666611', STR_TO_DATE('21-JUN-1977','%d-%b-%Y'), '213 Ball St,Philadelphia,PA', 'M', 32000, 8),
+    -> ('Sammy', 'G', 'Hall', '666666612', STR_TO_DATE('11-JAN-1970','%d-%b-%Y'), '433 Main Street,Miami,FL', 'M', 37000, 8),
+    -> ('Red', 'A', 'Bacher', '666666613', STR_TO_DATE('21-MAY-1980','%d-%b-%Y'), '196 Elm Street,Miami,FL', 'M', 33500, 8),
+    -> ('Roy', 'C', 'Lewallen', '999999999', STR_TO_DATE('02-MAR-1977','%d-%b-%Y'), '14 Wynncrest Street,Dallas,TX', 'M', 75500, 8),
+    -> ('John', 'T', 'Ed', '222333444', STR_TO_DATE('18-FEB-1981','%d-%b-%Y'), '4505 West St,Rochester,NY', 'M', 30000, 6),
+    -> ('Jennifer', 'A', 'Joy', '223344667', STR_TO_DATE('19-MAY-1976','%d-%b-%Y'), '1204 Main St,Miami,FL', 'F', 45000, 8),
+    -> ('Kim', 'G', 'Ted', '444222666', STR_TO_DATE('15-APR-1968','%d-%b-%Y'), '3648 Tree Cir,Austin,TX', 'M', 50000, 8),
+    -> ('Juan', 'G', 'Linda', '112244668', STR_TO_DATE('23-JUN-1965','%d-%b-%Y'), '1210 Apple St,Austin,TX', 'F', 55000, 9),
+    -> ('Jose', 'H', 'Barbara', '343434344', STR_TO_DATE('28-FEB-1955','%d-%b-%Y'), '905 East St,Kleen,TX', 'F', 35000, 6),
+    -> ('willie', 'D', 'Mary', '234234234', STR_TO_DATE('20-DEC-1961','%d-%b-%Y'), '101 South St,Arlington,TX', 'F', 12000, 9),
+    -> ('Erin', 'A', 'Maxfield', '242535609', STR_TO_DATE('22-DEC-1971','%d-%b-%Y'), '123 Copper St,Arlington,TX', 'F', 72000, 8),
+    -> ('Sunil', 'D', 'Gupta', '110110110', STR_TO_DATE('01-FEB-2001','%d-%b-%Y'), '4312 Bowen Rd,Arlington,TX', 'M', 80000, 3),
+    -> ('Penny', 'G', 'Wolowitz', '673466642', STR_TO_DATE('21-JAN-1974','%d-%b-%Y'), '42 South Blvd,Miami,FL', 'F', 17000, 6),
+    -> ('Michael', 'A', 'Morgan', '636669233', STR_TO_DATE('11-MAY-1984','%d-%b-%Y'), '26 Sunset Blvd,Miami,FL', 'M', 73500, 5),
+    -> ('Sheldon', 'C', 'Cucuou', '849934919', STR_TO_DATE('22-MAR-1974','%d-%b-%Y'), '11 Hollywood Blvd,Dallas,TX', 'M', 35500, 8),
+    -> ('Debra', 'T', 'Hall', '202843824', STR_TO_DATE('11-MAR-1983','%d-%b-%Y'), '45 NY St,Rochester,NY', 'F', 30000, 6),
+    -> ('Jisha', 'A', 'Carpenter', '292740167', STR_TO_DATE('29-MAY-1985','%d-%b-%Y'), '194 Beachdr,Miami,FL', 'F', 15000, 1),
+    -> ('Gregory', 'G', 'Laurie', '444212096', STR_TO_DATE('15-SEP-1969','%d-%b-%Y'), '78 Tree Cir,Houston,TX', 'M', 90000, 7),
+    -> ('Lisa', 'G', 'House', '101248268', STR_TO_DATE('29-JUN-1975','%d-%b-%Y'), '12 Maple St,Austin,TX', 'F', 85000, 7),
+    -> ('Leonard', 'H', 'Moody', '349273344', STR_TO_DATE('09-FEB-1973','%d-%b-%Y'), '908 Greek Row,Austin,TX', 'M', 45000, 7),
+    -> ('Jake', 'D', 'Sheen', '245239264', STR_TO_DATE('25-DEC-1954','%d-%b-%Y'), '20 North Co,Arlington,TX', 'M', 52000, 6),
+    -> ('Wilson', 'A', 'Holmes', '242916639', STR_TO_DATE('02-JUN-1971','%d-%b-%Y'), '21 South Co,Arlington,TX', 'M', 72500, 4),
+    -> ('Cameron', 'D', 'Thirteen', '111422203', STR_TO_DATE('04-MAY-2001','%d-%b-%Y'), '22 Univ Blvd,Arlington,TX', 'F', 80000, 4),
+    -> ('Joseph', 'K', 'Kirkish', '913323708', STR_TO_DATE('04-MAR-1996','%d-%b-%Y'), '22 UT Blvd,Austin,TX', 'M', 95000, 7),
+    -> ('Andrea', 'M', 'Sondrini', '614370310', STR_TO_DATE('30-DEC-1996','%d-%b-%Y'), '1450 Worthington St,Houston,TX', 'F', 65000, 5),
+    -> ('Cindy', 'K', 'Burklow', '432765098', STR_TO_DATE('23-FEB-1984','%d-%b-%Y'), '2015 Neil Ave,Miami,FL', 'F', 45000, 6),
+    -> ('Zach', 'A', 'Geller', '913353347', STR_TO_DATE('15-AUG-1990','%d-%b-%Y'), '333 PikeWay,Seattle,WA', 'M', 55000, 6),
+    -> ('Alex', 'C', 'Yu', '001614905', STR_TO_DATE('17-OCT-1980','%d-%b-%Y'), '626 Mary St,Dallas,TX', 'M', 50000, 6),
+    -> ('Richard', 'T', 'Koelbel', '214370999', STR_TO_DATE('3-APR-1976','%d-%b-%Y'), '50 Elk St,Chicago,IL', 'M', 85000, 4),
+    -> ('Christina', 'S', 'Hisel', '241625699', STR_TO_DATE('5-JUL-1986','%d-%b-%Y'), '37 Church Row,Rochester,NY', 'F', 45000, 6),
+    -> ('Percy', 'M', 'Liang', '398172999', STR_TO_DATE('12-JUN-1991','%d-%b-%Y'), '14 Maple St,Austin,TX', 'M', 55000, 9),
+    -> ('James', 'U', 'Miller', '906218888', STR_TO_DATE('27-MAY-1978','%d-%b-%Y'), '13 Fifth St,Seattle,WA', 'M', 75000, 5);
+Query OK, 70 rows affected (0.19 sec)
+Records: 70  Duplicates: 0  Warnings: 0
+
+mysql> UPDATE DEPARTMENT SET Manager_ssn='333445555', Manager_start_date=STR_TO_DATE('22-MAY-1978','%d-%b-%Y') WHERE Dnumber=5;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE DEPARTMENT SET Manager_ssn='987654321', Manager_start_date=STR_TO_DATE('01-JAN-1985','%d-%b-%Y') WHERE Dnumber=4;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE DEPARTMENT SET Manager_ssn='111111100', Manager_start_date=STR_TO_DATE('15-MAY-1999','%d-%b-%Y') WHERE Dnumber=6;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE DEPARTMENT SET Manager_ssn='444444400', Manager_start_date=STR_TO_DATE('15-MAY-1998','%d-%b-%Y') WHERE Dnumber=7;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE DEPARTMENT SET Manager_ssn='555555500', Manager_start_date=STR_TO_DATE('01-JAN-1997','%d-%b-%Y') WHERE Dnumber=8;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE DEPARTMENT SET Manager_ssn='112244668', Manager_start_date=STR_TO_DATE('01-FEB-1989','%d-%b-%Y') WHERE Dnumber=9;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE DEPARTMENT SET Manager_ssn='110110110', Manager_start_date=STR_TO_DATE('15-MAY-2009','%d-%b-%Y') WHERE Dnumber=3;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE DEPARTMENT SET Manager_ssn='913323708', Manager_start_date=STR_TO_DATE('2-FEB-2010','%d-%b-%Y') WHERE Dnumber=11;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> INSERT INTO DEPT_LOCATIONS (Dnumber, Dlocation) VALUES
+    -> (1, 'Houston'),
+    -> (4, 'Stafford'),
+    -> (5, 'Bellaire'),
+    -> (5, 'Sugarland'),
+    -> (5, 'Houston'),
+    -> (6, 'Atlanta'),
+    -> (6, 'Sacramento'),
+    -> (7, 'Milwaukee'),
+    -> (8, 'Chicago'),
+    -> (8, 'Dallas'),
+    -> (8, 'Philadephia'),
+    -> (8, 'Seattle'),
+    -> (8, 'Miami'),
+    -> (9, 'Arlington'),
+    -> (11, 'Austin');
+Query OK, 15 rows affected (0.13 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO PROJECT (Pname, Pnumber, Plocation, Controlling_department) VALUES 
+    -> ('EntityAnnot', 4, 'Houston', 5), 
+    -> ('Analysis', 5, 'Sacramento', 6), 
+    -> ('EventManagement', 6, 'Sacramento', 6), 
+    -> ('FoodDistribution', 7, 'Sacramento', 6), 
+    -> ('Computerization', 10, 'Stafford', 4), 
+    -> ('ConfigMgmt', 11, 'Atlanta', 6), 
+    -> ('DataMining', 13, 'Sacramento', 6), 
+    -> ('Reorganization', 20, 'Houston', 1), 
+    -> ('Benefits', 30, 'Stafford', 4), 
+    -> ('OperatingSystem', 61, 'Sacramento', 6), 
+    -> ('DatabaseSystems', 62, 'Atlanta', 6), 
+    -> ('Middleware', 63, 'Atlanta', 6), 
+    -> ('Advertizing', 70, 'Arlington', 9), 
+    -> ('InkjetPrinters', 91, 'Milwaukee', 7), 
+    -> ('LaserPrinters', 92, 'Milwaukee', 7), 
+    -> ('HumanResource', 95, 'Arlington', 9), 
+    -> ('SearchEngine', 22, 'Arlington', 6), 
+    -> ('MotherBoard', 29, 'Milwaukee', 7);
+Query OK, 18 rows affected (0.15 sec)
+Records: 18  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO WORKS_ON (Essn, Pno, Hours) VALUES
+    -> ('123456789', 5, 32.5),
+    -> ('123456789', 6, 7.5),
+    -> ('666884444', 7, 40.0),
+    -> ('453453453', 5, 20.0),
+    -> ('453453453', 6, 20.0),
+    -> ('333445555', 7, 10.0),
+    -> ('333445555', 10, 10.0),
+    -> ('333445555', 20, 10.0),
+    -> ('242535609', 70, 20.0),
+    -> ('242535609', 62, 20.0),
+    -> ('999887777', 30, 30.0),
+    -> ('999887777', 10, 10.0),
+    -> ('987987987', 10, 35.0),
+    -> ('987987987', 30, 5.0),
+    -> ('987654321', 30, 20.0),
+    -> ('987654321', 20, 15.0),
+    -> ('111111100', 61, 40.0),
+    -> ('111111101', 61, 40.0),
+    -> ('111111102', 61, 40.0),
+    -> ('111111103', 61, 40.0),
+    -> ('222222200', 62, 40.0),
+    -> ('222222201', 62, 48.0),
+    -> ('222222202', 62, 40.0),
+    -> ('222222203', 62, 40.0),
+    -> ('222222204', 62, 40.0),
+    -> ('222222205', 62, 40.0),
+    -> ('333333300', 63, 40.0),
+    -> ('333333301', 63, 46.0),
+    -> ('444444400', 91, 40.0),
+    -> ('444444401', 91, 40.0),
+    -> ('444444402', 91, 40.0),
+    -> ('444444403', 91, 40.0),
+    -> ('555555500', 92, 40.0),
+    -> ('555555501', 92, 44.0),
+    -> ('666666601', 91, 40.0),
+    -> ('666666603', 91, 40.0),
+    -> ('666666604', 91, 40.0),
+    -> ('666666605', 92, 40.0),
+    -> ('666666606', 91, 40.0),
+    -> ('666666607', 61, 40.0),
+    -> ('666666608', 62, 40.0),
+    -> ('666666609', 63, 40.0),
+    -> ('666666610', 61, 40.0),
+    -> ('666666611', 61, 40.0),
+    -> ('666666612', 61, 40.0),
+    -> ('666666613', 61, 30.0),
+    -> ('666666613', 62, 10.0),
+    -> ('666666613', 63, 10.0),
+    -> ('999999999', 5, 2.0),
+    -> ('999999999', 6, 2.0),
+    -> ('999999999', 7, 4.0),
+    -> ('999999999', 10, 4.0),
+    -> ('999999999', 20, 4.0),
+    -> ('999999999', 30, 4.0),
+    -> ('999999999', 61, 4.0),
+    -> ('999999999', 62, 4.0),
+    -> ('999999999', 63, 4.0),
+    -> ('999999999', 70, 2.0),
+    -> ('999999999', 91, 2.0),
+    -> ('999999999', 92, 1.0),
+    -> ('999999999', 95, 3.0),
+    -> ('254937381', 70, 40.0),
+    -> ('222333444', 91, 10.0),
+    -> ('223344667', 63, 20.0),
+    -> ('444222666', 62, 25.0),
+    -> ('112244668', 95, 40.0),
+    -> ('343434344', 63, 40.0),
+    -> ('234234234', 95, 35.0),
+    -> ('913323708', 92, 33.0),
+    -> ('636669233', 4, 11.0),
+    -> ('614370310', 3, 45.0),
+    -> ('849934919', 95, 23.0),
+    -> ('432765098', 63, 25.0),
+    -> ('444212096', 63, 25.0),
+    -> ('913353347', 22, 30.0),
+    -> ('292740167', 5, 25.0),
+    -> ('202843824', 11, 20.0),
+    -> ('673466642', 22, 4.0),
+    -> ('101248268', 29, 10.0),
+    -> ('245239264', 11, 25.0),
+    -> ('242916639', 4, 5.0),
+    -> ('906218888', 29, 15.0),
+    -> ('001614905', 13, 18.0),
+    -> ('245239264', 10, 25.0),
+    -> ('349273344', 29, 15.0),
+    -> ('242916639', 11, 20.0),
+    -> ('214370999', 10, 35.0),
+    -> ('111422203', 4, 45.0),
+    -> ('398172999', 70, 10.0),
+    -> ('241625699', 61, 4.0),
+    -> ('245239264', 5, 5.0),
+    -> ('349273344', 6, 10.0),
+    -> ('242916639', 7, 10.0),
+    -> ('214370999', 5, 4.0),
+    -> ('111422203', 6, 5.0),
+    -> ('398172999', 7, 10.0);
+Query OK, 96 rows affected (0.15 sec)
+Records: 96  Duplicates: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=888665151;
+Query OK, 0 rows affected (0.10 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=111111100;
+Query OK, 0 rows affected (0.04 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=444444400;
+Query OK, 0 rows affected (0.03 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=555555500;
+Query OK, 0 rows affected (0.03 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='333445555' WHERE SSN=123456789;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='987654321' WHERE SSN=999887777;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='333445555' WHERE SSN=666884444;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='333445555' WHERE SSN=453453453;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='987654321' WHERE SSN=987987987;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='111111100' WHERE SSN=111111101;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='111111100' WHERE SSN=111111102;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='111111100' WHERE SSN=111111103;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=222222200;
+Query OK, 0 rows affected (0.04 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='222222200' WHERE SSN=222222201;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='222222200' WHERE SSN=222222202;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='222222200' WHERE SSN=222222203;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='222222201' WHERE SSN=222222204;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='222222201' WHERE SSN=222222205;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=333333300;
+Query OK, 0 rows affected (0.03 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='333333300' WHERE SSN=333333301;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='444444400' WHERE SSN=444444401;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='444444400' WHERE SSN=444444402;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='444444400' WHERE SSN=444444403;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='555555500' WHERE SSN=555555501;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=666666600;
+Query OK, 0 rows affected (0.07 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666600' WHERE SSN=666666601;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666600' WHERE SSN=666666602;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666601' WHERE SSN=666666603;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666603' WHERE SSN=666666604;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666600' WHERE SSN=254937381;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666603' WHERE SSN=666666605;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666604' WHERE SSN=666666606;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666602' WHERE SSN=666666607;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666602' WHERE SSN=666666608;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666602' WHERE SSN=666666609;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666607' WHERE SSN=666666610;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666610' WHERE SSN=666666611;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666611' WHERE SSN=666666612;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666612' WHERE SSN=666666613;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666600' WHERE SSN=999999999;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='555555501' WHERE SSN=222333444;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666613' WHERE SSN=223344667;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='999999999' WHERE SSN=444222666;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=112244668;
+Query OK, 0 rows affected (0.05 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='444444400' WHERE SSN=343434344;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='112244668' WHERE SSN=234234234;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='555555500' WHERE SSN=242535609;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='111111100' WHERE SSN=110110110;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='222333444' WHERE SSN=673466642;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666612' WHERE SSN=636669233;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='555555501' WHERE SSN=202843824;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='666666613' WHERE SSN=292740167;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='444444400' WHERE SSN=444212096;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=101248268;
+Query OK, 0 rows affected (0.03 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='444444400' WHERE SSN=349273344;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='112244668' WHERE SSN=245239264;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='555555500' WHERE SSN=242916639;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='987987987' WHERE SSN=111422203;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=913323708;
+Query OK, 0 rows affected (0.04 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='444444401' WHERE SSN=614370310;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='444444402' WHERE SSN=432765098;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='444444403' WHERE SSN=913353347;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='444444400' WHERE SSN=001614905;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='999999999' WHERE SSN=214370999;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='123456789' WHERE SSN=241625699;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor=NULL WHERE SSN=398172999;
+Query OK, 0 rows affected (0.05 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET Supervisor='999999999' WHERE SSN=906218888;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+

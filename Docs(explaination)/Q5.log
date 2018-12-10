@@ -1,0 +1,18 @@
+/* Inserting the record into Employee table which violate the integrity constraints.
+	Here, adding the record which trying to insert department which is not exists in Department table.
+	And same for supervisor.
+*/
+mysql> INSERT INTO `EMPLOYEE` (SSN, Fname, Minit, Lname, Address, Sex, Birth_date, Salary, Supervisor, Department) VALUES ('1234567890', 'Dhruvi', 'R', 'Rajput', '4 ABC Street, XYZ Town 12345', 'F', STR_TO_DATE('11-AUG-2012', '%d-%b-%Y'), 55000, '123456789', 15);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`db-project-1`.`EMPLOYEE`, CONSTRAINT `EMPLOYEE_ibfk_2` FOREIGN KEY (`Department`) REFERENCES `DEPARTMENT` (`Dnumber`))
+
+/* Inserting the record into Works_on table which violate the integrity constraints.
+	Here, adding the record which trying to insert Pno which is not exists in Project table.
+*/
+mysql> INSERT INTO `WORKS_ON` (Essn, Pno, Hours) VALUES ('111111103', 25, 10.0);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`db-project-1`.`WORKS_ON`, CONSTRAINT `WORKS_ON_ibfk_2` FOREIGN KEY (`Pno`) REFERENCES `PROJECT` (`Pnumber`))
+
+/* Inserting the record into Project table which violate the integrity constraints.
+	Here, adding the record which trying to insert Controlling_department which is not exists in Department table.
+*/
+mysql> INSERT INTO `PROJECT` (Pname, Pnumber, Plocation, Controlling_department) VALUES ('TEST', 15, 'Dallas', 22);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`db-project-1`.`PROJECT`, CONSTRAINT `PROJECT_ibfk_1` FOREIGN KEY (`Controlling_department`) REFERENCES `DEPARTMENT` (`Dnumber`))

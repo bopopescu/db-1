@@ -1,0 +1,11 @@
+/* Inserting record same as in Q5, but without violating the integrity constraints.
+*/
+mysql> INSERT INTO `EMPLOYEE` (SSN, Fname, Minit, Lname, Address, Sex, Birth_date, Salary, Supervisor, Department) VALUES ('1234567890', 'Dhruvi', 'R', 'Rajput', '4 ABC Street, XYZ Town 12345', 'F', STR_TO_DATE('11-AUG-2012', '%d-%b-%Y'), 55000, '333445555', 5);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO `WORKS_ON` (Essn, Pno, Hours) VALUES ('1234567890', 4, 10.0);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO `PROJECT` (Pname, Pnumber, Plocation, Controlling_department) VALUES ('TEST', 15, 'Dallas', 5);
+Query OK, 1 row affected (0.04 sec)
+

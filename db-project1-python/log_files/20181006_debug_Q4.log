@@ -1,0 +1,12 @@
+ERROR    - 2018-10-06 09:32:22,085 [db.py][insert_query]  Error Message: 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+INFO     - 2018-10-06 09:32:22,086 [Q4.py][q4_1]  INSERT INTO `DEPARTMENT`(`Dname`, `Dnumber`, `Manager_ssn`, `Manager_start_date`) VALUES (%s, %s, %s, STR_TO_DATE(%s, '%d-%b-%Y')) ('Services', 1, '123456789', '11-AUG-2012')
+ERROR    - 2018-10-06 09:32:46,088 [db.py][insert_query]  Error Message: 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+INFO     - 2018-10-06 09:32:46,089 [Q4.py][q4_2]  INSERT INTO `DEPARTMENT`(`Dname`, `Dnumber`, `Manager_ssn`, `Manager_start_date`) VALUES (%s, %s, %s, STR_TO_DATE(%s, '%d-%b-%Y')) ('Purchasing', 3, '990110110', '02-FEB-2013')
+INFO     - 2018-10-06 09:34:31,789 [Q4.py][q4_3]  INSERT INTO `DEPARTMENT`(`Dname`, `Dnumber`, `Manager_ssn`, `Manager_start_date`) VALUES (%s, %s, %s, STR_TO_DATE(%s, '%d-%b-%Y')) ('Customers', 12, '333445555', '14-JAN-2013')
+INFO     - 2018-10-06 09:37:33,131 [Q4.py][q4_4]  UPDATE DEPT_LOCATIONS SET Dnumber=%s WHERE Dlocation=%s (9, 'Seattle')
+INFO     - 2018-10-06 09:39:24,309 [Q4.py][q4_5]  UPDATE EMPLOYEE SET Salary=%s WHERE SSN=%s (55000, '444444444')
+ERROR    - 2018-10-06 09:44:33,550 [db.py][insert_query]  Error Message: 1062 (23000): Duplicate entry '666666606' for key 'PRIMARY'
+INFO     - 2018-10-06 09:44:33,550 [Q4.py][q4_6]  INSERT INTO `EMPLOYEE` (Fname, Minit, Lname, SSN, Birth_date, Address, Sex, Salary, Supervisor, Department) VALUES (%s, %s, %s, %s, STR_TO_DATE(%s, '%d-%b-%Y'), %s, %s, %s, %s, %s) ('Jane', 'B', 'Smith', '666666606', '01-MAR-1980', '3556 W Second Street,Miami,FL', 'F', 85000, '666666603', 5)
+INFO     - 2018-10-06 09:48:16,644 [Q4.py][q4_7]  UPDATE WORKS_ON SET Hours=%s WHERE Pno=%s AND Essn=%s (25, 1, '666884444')
+INFO     - 2018-10-06 09:52:16,927 [Q4.py][q4_8]  DELETE FROM EMPLOYEE WHERE SSN=%s 432765098
+INFO     - 2018-10-06 09:54:47,161 [Q4.py][q4_9]  DELETE FROM DEPARTMENT WHERE Dnumber=%s 9
